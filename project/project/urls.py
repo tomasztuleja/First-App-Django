@@ -16,9 +16,10 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include 
 
 # URL globalne dla projektu
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include("project.views")), # Pointing to urlpatterns to created by us views.py file
 ]
