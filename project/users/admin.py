@@ -8,7 +8,13 @@ class CustomUserAdminDisplay(UserAdmin):
     '''Definning how the display will be look in admin page'''
     add_form = CustomUserCreationForm # Using our forms from forms.py
     model = CustomUser
-    list_display = ['email', 'username',] # Atribiutes from CustomUser model which will be displayed in admin page as list
+    add_fieldsets = (
+    (None, {
+        'classes': ('wide',),
+        'fields': ('first_name', "last_name" ,'email', 'username', 'password1', 'password2',)
+    }),
+) # Adding to admin create user page additional fields.
+    list_display = ['username', 'email', 'date_joined', "last_name", 'first_name'] # Atribiutes from CustomUser model which will be displayed in admin page as list
 
 # Register your models here.
 admin.site.register(CustomUser, CustomUserAdminDisplay)
