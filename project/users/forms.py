@@ -4,18 +4,14 @@ from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
     '''Our register form'''
-    email = forms.EmailField(required=True) # Creating field that will be avalivale in register page
-    first_name = forms.CharField(max_length=50) # Same as above
-    last_name = forms.CharField(max_length=50) # Same as above
 
     class Meta:
         '''Defining our form'''
         model = CustomUser # Definig to which model our form should be related
         fields = ("first_name", "last_name", "username", "email", "password1", "password2") # Fields avaliable in our form on register page
 
-    def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
-        user.email = self.cleaned_data["email"]
-        if commit:
-            user.save()
-        return user
+    def save(self):
+        '''Creating our user and saveing it'''
+        custom_user = CustomUser.objects.create_user(username=self.cleaned_data['username'], password=self.cleaned_data['password1'], first_name=self.cleaned_data['first_name'], last_name=self.cleaned_data['last_name'], email=self.cleaned_data['email'])
+        custom_user.save()
+        return custom_user
