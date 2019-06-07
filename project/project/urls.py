@@ -22,4 +22,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("project.views")), # Pointing to urlpatterns to created by us views.py file
+    path('register', include('users.urls')), # Pointing to urlpatterns in created by us urls.py file in users folder
 ]
