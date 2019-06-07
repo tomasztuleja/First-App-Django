@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Warsaw'
 
@@ -122,3 +122,6 @@ STATIC_URL = '/static/'
 
 # Added by developers under this comment.
 AUTH_USER_MODEL = 'users.CustomUser' # Telling Django that this will be our user model.
+
+from django.urls import reverse_lazy
+LOGOUT_REDIRECT_URL = reverse_lazy('home') # We're using reverse_lazy to tell Django that he used to load this template when it will be avaliable.
