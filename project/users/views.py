@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UpdateUserProfileForm
 from django.urls import reverse
 from .models import CustomUser
 from django import forms
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth import views as auth_views
 from django.http import HttpResponseRedirect
 
@@ -45,3 +45,21 @@ class LogInPageView(LogoutRequiredMixin ,auth_views.LoginView):
 class LogOutPageView(auth_views.LogoutView):
     '''Our log out page, inherited from Django LogoutView, redirected page is defined in settings.py in LOGOUT_REDIRECT_URL variable'''
     pass
+
+
+class EditUserProfilePageView(UpdateView):
+    '''Our edit profile info which is displaying only profile of the user which is logged in'''
+    model = CustomUser
+    fields = ['first_name', 'last_name', "sex"] # Fields which will can be edited
+    template_name = 'users/editUserProfile.html'
+    slug_field = "username" # Slug filed which will be in url pattern
+
+    def get_queryset(self):
+        '''Defining if logged in user can edit profile'''
+        user_to_be_eddited = CustomUser.objects.filter(username = self.request.user.username ) # Filtering only objects of the current logged in user, so only logged in users can edit their profile info
+        return user_to_be_eddited
+
+    def get_success_url(self):
+        # Redirecting after login
+        return reverse('home')
+
