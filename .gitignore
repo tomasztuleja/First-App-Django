@@ -1,1 +1,4 @@
-env
+env/
+project/project/__pycache__/
+project/users/__pycache__/
+first-app/
