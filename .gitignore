@@ -1,4 +1,4 @@
 env/
 *.pyc
-first-app/
 .vscode/
+.idea/
