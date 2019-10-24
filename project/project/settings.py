@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UsersConfig', # Added new installed app.
+    'users.apps.UsersConfig',  # Added new installed app.
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'project', 'templates')], # Adding directory to our templates folder
+        'DIRS': [os.path.join(BASE_DIR, 'project', 'templates')],  # Adding directory to our templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Added by developers under this comment.
-AUTH_USER_MODEL = 'users.CustomUser' # Telling Django that this will be our user model.
+AUTH_USER_MODEL = 'users.CustomUser'  # Telling Django that this will be our user model.
 
-from django.urls import reverse_lazy
-LOGOUT_REDIRECT_URL = reverse_lazy('home') # We're using reverse_lazy to tell Django that he used to load this template when it will be avaliable.
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
+# We're using reverse_lazy to tell Django that he used to load this template when it will be available.

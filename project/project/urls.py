@@ -18,8 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 
-# URL globalne dla projektu
+# global URLs for project
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('users.urls')), # Pointing to urlpatterns in created by us urls.py file in users folder
+    path('', include('users.urls')),  # Pointing to urlpatterns in created by us urls.py file in users folder
 ]
