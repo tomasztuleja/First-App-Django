@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from project.choices import SEX_CHOICES
+from ..project.choices import SEX_CHOICES
 
 
 # Create your models here.
