@@ -37,7 +37,7 @@ class CustomUserModelFieldsTests(TestCase):
         self.assertEquals(self.created_user.sex, 1)
 
     def test_if_date_joined_is_valid(self):
-        self.assertLess(self.created_user.date_joined, timezone.now())
+        self.assertLessEqual(self.created_user.date_joined, timezone.now())
 
     def test_if_created_users_staff_field_is_false(self):
         """Checking if created user cannot log in into admin page"""
