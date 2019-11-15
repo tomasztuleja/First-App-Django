@@ -15,7 +15,7 @@ class CustomUserModelFieldsTests(TestCase):
                                                       last_name="some_last_name",
                                                       username="some_nickname",
                                                       email="some_email@gmail.com",
-                                                      sex=1
+                                                      sex=1,
                                                       )
 
     # Testing fields of CustomUser model
@@ -38,7 +38,7 @@ class CustomUserModelFieldsTests(TestCase):
         return self.assertEquals(self.created_user.sex, 1)
 
     def test_is_date_joined_is_valid(self):
-        return self.assertLess(self.created_user.date_joined, timezone.now())
+        return self.assertLessEqual(self.created_user.date_joined, timezone.now())
 
     def test_is_created_user_is_staff_field_is_false(self):
         """Checking if created user cannot log in into admin page"""
@@ -53,7 +53,7 @@ class RegistrationUserTests(TestCase):
                                                       last_name="some_last_name",
                                                       username="some_nickname",
                                                       email="some_email@gmail.com",
-                                                      sex=1
+                                                      sex=1,
                                                       )
 
     def test_if_it_is_possible_to_create_user_with_already_used_username(self):
@@ -62,7 +62,7 @@ class RegistrationUserTests(TestCase):
                                                                                 last_name="some_last_name",
                                                                                 username="some_nickname",
                                                                                 email="some_second_email@gmail.com",
-                                                                                sex=1
+                                                                                sex=1,
                                                                                 )
 
     def test_if_it_is_possible_to_create_user_with_already_used_email(self):
@@ -71,7 +71,7 @@ class RegistrationUserTests(TestCase):
                                                                                 last_name="some_last_name",
                                                                                 username="some_second_nickname",
                                                                                 email="some_email@gmail.com",
-                                                                                sex=1
+                                                                                sex=1,
                                                                                 )
 
 
@@ -108,7 +108,7 @@ class TemplatesAddressesStatusCodeTests(TestCase):
                                     status_code=302,
                                     target_status_code=200,
                                     msg_prefix='',
-                                    fetch_redirect_response=True
+                                    fetch_redirect_response=True,
                                     )
 
     def test_is_status_code_of_logout_page_get_by_url_address_is_200(self):
@@ -119,7 +119,7 @@ class TemplatesAddressesStatusCodeTests(TestCase):
                                     status_code=302,
                                     target_status_code=200,
                                     msg_prefix='',
-                                    fetch_redirect_response=True
+                                    fetch_redirect_response=True,
                                     )
 
     def test_is_status_code_of_edit_profile_page_for_anonymous_user_is_404(self):
@@ -127,7 +127,7 @@ class TemplatesAddressesStatusCodeTests(TestCase):
                                                  last_name="some_last_name",
                                                  username="some_nickname",
                                                  email="some_email@gmail.com",
-                                                 sex=1
+                                                 sex=1,
                                                  )
         response = self.client.get('http://127.0.0.1:8000/edit_profile/' + created_user.username)
         return self.assertEquals(response.status_code, 404)
@@ -140,7 +140,7 @@ class LoggedInUserTestsByLoginForm(TestCase):
                                                       username="some_nickname",
                                                       email="some_email@gmail.com",
                                                       password="1234",
-                                                      sex=1
+                                                      sex=1,
                                                       )
         self.created_user.set_password('1234')
         self.created_user.save()
@@ -162,7 +162,7 @@ class LoggedInUserTests(TestCase):
                                                                               username="some_nickname",
                                                                               email="some_email@gmail.com",
                                                                               password="1234",
-                                                                              sex=1
+                                                                              sex=1,
                                                                               )[0])
 
     def test_is_only_logged_in_user_can_get_his_profile_info_page(self):
@@ -179,7 +179,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -190,7 +190,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -201,7 +201,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -212,7 +212,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -223,7 +223,7 @@ class FormsTests(TestCase):
                      'last_name': 'some_last_name',
                      'email': 'some_email@gmail.com',
                      'password2': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -234,7 +234,7 @@ class FormsTests(TestCase):
                      'last_name': 'some_last_name',
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -246,7 +246,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 's',
                      'password2': 's',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -258,7 +258,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -268,7 +268,7 @@ class FormsTests(TestCase):
                                   last_name="some_last_name",
                                   username="some_nickname",
                                   email="some_email@gmail.com",
-                                  sex=1
+                                  sex=1,
                                   )
         form_data = {'username': 'some_nickname',
                      'first_name': 'some_first_name',
@@ -276,7 +276,7 @@ class FormsTests(TestCase):
                      'email': 'some_other_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -286,7 +286,7 @@ class FormsTests(TestCase):
                                   last_name="some_last_name",
                                   username="some_nickname",
                                   email="some_email@gmail.com",
-                                  sex=1
+                                  sex=1,
                                   )
         form_data = {'username': 'some_other_nickname',
                      'first_name': 'some_first_name',
@@ -294,7 +294,7 @@ class FormsTests(TestCase):
                      'email': 'some_email@gmail.com',
                      'password1': 'some_password10',
                      'password2': 'some_password',
-                     'sex': 1
+                     'sex': 1,
                      }
         form = CustomUserCreationForm(data=form_data)
         self.assertFalse(form.is_valid())

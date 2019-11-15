@@ -1,4 +1,6 @@
 env/
+venv/
 *.pyc
 .vscode/
 .idea/
+project/db.sqlite3

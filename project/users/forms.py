@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
-from ..project.choices import SEX_CHOICES
+from .choices import SEX_CHOICES
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -14,14 +14,14 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'sex')
         # Fields available in our form on register page
 
-    def save(self):
+    def save(self, commit=True):
         """Creating our user and saving it"""
         custom_user = CustomUser.objects.create_user(username=self.cleaned_data['username'],
                                                      password=self.cleaned_data['password1'],
                                                      first_name=self.cleaned_data['first_name'],
                                                      last_name=self.cleaned_data['last_name'],
                                                      email=self.cleaned_data['email'],
-                                                     sex=self.cleaned_data['sex']
+                                                     sex=self.cleaned_data['sex'],
                                                      )
         custom_user.save()
         return custom_user
@@ -43,14 +43,14 @@ class UpdateUserProfileForm(forms.ModelForm):
         username = self.cleaned_data.get('username')
         email = self.cleaned_data.get('email')
 
-        if email and User.objects.filter(email=email).exclude(username=username).count():
+        if email and CustomUser.objects.filter(email=email).exclude(username=username).count():
             # Checking if email address is already in use
             raise forms.ValidationError(
                 'This email address is already in use. Please supply a different email address.')
         return email
 
     def save(self, commit=True):
-        user = super(CustomUserCreationForm, self).save(commit=False)
+        user = super(self).save(commit=False)
         user.email = self.cleaned_data['email']
 
         if commit:
