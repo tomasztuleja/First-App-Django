@@ -16,10 +16,15 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path, include
+
+# from project.api.urls import router
 
 # global URLs for project
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('api/', include(router.urls), name='api'),
     path('', include('users.urls')),  # Pointing to urlpatterns in created by us urls.py file in users folder
 ]

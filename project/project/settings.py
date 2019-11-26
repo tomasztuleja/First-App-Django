@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'users.apps.UsersConfig',  # Added new installed app.
 ]
 
@@ -124,5 +125,14 @@ STATIC_URL = '/static/'
 # Added by developers under this comment.
 AUTH_USER_MODEL = 'users.CustomUser'  # Telling Django that this will be our user model.
 
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 # We're using reverse_lazy to tell Django that he used to load this template when it will be available.
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

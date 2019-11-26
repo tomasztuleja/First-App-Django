@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+
 from .views import HomePageView, RegisterPageView, LogInPageView, LogOutPageView, EditUserProfilePageView
 
 urlpatterns = [
@@ -7,4 +8,5 @@ urlpatterns = [
     path('login', LogInPageView.as_view(), name="login"),
     path('logout', LogOutPageView.as_view(), name="logout"),
     path('edit_profile/<str:slug>', EditUserProfilePageView.as_view(), name="edit_profile"),
+    path('api-auth/', include('rest_framework.urls')),
 ]
